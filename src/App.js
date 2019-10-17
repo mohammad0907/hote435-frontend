@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React , {Component} from 'react';
+import Nav from "./components/nav.js"
+import HomePage from "./components/homePage/homePage.js"
+import Rooms from "./components/rooms/rooms.js"
+import Reservation from "./components/reservations/reservation.js"
+import Checkout from "./components/checkout/checkout.js"
+import {BrowserRouter, Route} from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component{
+    
+  constructor(props){
+    super(props);
+    this.state = {
+
+    }
+
+  }
+  
+
+  render(){
+    return(
+      <BrowserRouter>
+        <div>
+          <Nav />
+           <Route exact path = "/" component = {HomePage} />
+           <Route  path = "/rooms" component = {Rooms} />
+           <Route  path = "/reservation" component = {Reservation} />
+           <Route  path = "/checkout" component = {Checkout} />
+        </div>
+      </BrowserRouter>
+    
+    
+      ) //end-return 
+  }// end-render
+
+
+
+
+} //end-class
 
 export default App;
