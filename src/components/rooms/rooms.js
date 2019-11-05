@@ -4,6 +4,9 @@ import RoomIntro from "./roomIntro.js"
 import DateForm from "./dateForm.js"
 import Filters from "./filters.js"
 import RoomGrid from "./roomGrid/roomGrid.js"
+import moment from "moment"
+import { loadOptions } from "@babel/core"
+
 
 
 //end-constructor
@@ -91,6 +94,10 @@ function Rooms(){
             }
     ]
 
+    let localStorage = window.localStorage
+    localStorage.setItem("roomStorage", JSON.stringify(roomData))
+    
+
     const [filters, setFilters] = React.useState({
         price: 0,
         guestsAllowed : 0,
@@ -118,7 +125,7 @@ function Rooms(){
             setFilters(filtersVal)
          }
 
-         console.log(filters)
+        
 
         
         
@@ -127,8 +134,14 @@ function Rooms(){
          
          //to check when a user inputed dates
          if (startDate !== "" && endDate !== ""){
-                showItems = true
+                if(moment(endDate, "MM-DD-YYYY").isAfter(startDate, "MM-DD-YYYY")){
+                    showItems = true;
+                } else {
+                    alert("Invalid Date Range")
+                }
          }
+
+
 
         
          
@@ -139,27 +152,28 @@ function Rooms(){
          
        
         return(
-            
-            <div>
-                <div className = "roomContainer">
-                    
-                    <div className = "roomIntroContainer">
-                         <RoomIntro /> 
-                    </div>
-                    <div>
-                        <h1>Search Rooms</h1>
-                    </div>
-                    
-                    <DateForm getDate = {getDate}  />
+           
+                <div>
+                    <div className = "roomContainer">
+                        
+                        <div className = "roomIntroContainer">
+                            <RoomIntro /> 
+                        </div>
+                        <div>
+                            <h1>Search Rooms</h1>
+                        </div>
+                        
+                        <DateForm getDate = {getDate}  />
 
-                    <Filters getFilters = {getFilters} disp = {showItems}  />
+                        <Filters getFilters = {getFilters} disp = {showItems}  />
+                        
+                        <RoomGrid roomData = {roomData} startDate = {startDate} endDate = {endDate} filters = {filters} disp = {showItems}/>
+                        
                     
-                    <RoomGrid roomData = {roomData} startDate = {startDate} endDate = {endDate} filters = {filters} disp = {showItems}/>
-                    
-                  
+                    </div>
+                
                 </div>
-              
-            </div>
+            
         ) // end-return
     //end-render
 

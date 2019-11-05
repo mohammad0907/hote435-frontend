@@ -15,6 +15,7 @@ body{
 }
 
 
+
 .introMain{
   background-image: url("./components/homePage/images/homePic.jpg");
   background-size: cover;
@@ -34,6 +35,7 @@ body{
   flex-direction: column;
   align-items: center;
   color:whitesmoke;
+  text-align: center;
 }
 
 
@@ -50,6 +52,7 @@ body{
   font-size: 22px;
    display: flex;
    justify-content: center;
+   text-align: center;
 }
 
 .serviceItems{
@@ -144,7 +147,10 @@ form{
   margin-left: 20px;
 }
 
-
+.filter{
+  width : 100%;
+  
+}
 
 
 /*room Grid*/
@@ -213,4 +219,355 @@ form{
 
 .roomPrice > *{
   margin-right: 20px;
+}
+
+
+
+.roomDetailsMain{
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+ 
+}
+.roomDetailsMain > * {
+  margin-bottom: 20px;
+  
+}
+.roomDetsPics{
+  display: flex;
+  width: 90%;
+  
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.roomDetsPics > * {
+  margin-left:  20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.mainDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainDetails > div{
+  display: flex;
+  justify-content: center;
+  
+}
+.mainDetails > div > * {
+  
+}
+
+
+.roomDetsdesc{
+  display: flex;
+  width: 50%;
+  
+}
+
+
+
+
+
+.checkoutMain{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.nameCont{
+  width: 60%;
+
+  height: 200px;
+  margin-bottom: 60px;
+}
+
+.addressCont{
+  width: 60%;
+ 
+  margin-bottom: 30px;
+}
+
+.paymentCont{
+  width: 60%;
+ 
+  
+  margin-bottom: 90px;
+
+}
+.checkOutInfo{
+  display: flex;
+  justify-content: center;
+}
+.checkOutInfo > * {
+  margin-left: 20px;
+}
+
+.bookNow{
+ display: flex;
+  width: 100%;
+  align-items: center;
+  height: 50px;
+  background-color: #444054;
+  margin-bottom: 90px;
+  margin-top: 20px;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+}
+
+.bookNow:hover {
+  opacity: 0.9;
+} 
+
+
+
+
+.confirmationCont{
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.confirmBox{
+  width: 50%;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+
+/*reservation */
+.reservationIntro {
+  width: 100%;
+  height: 500px;
+  background-image: url("./components/reservations/images/beds.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reservationIntro h1 {
+  font-size: 3.2em;
+}
+
+.reservForm {
+  text-align: center;
+}
+
+.reservForm form {
+  display: inline-block;
+}
+
+.reservForm button {
+  width: 10%;
+  height: 55%;
+  position: relative;
+  top: 2em;
+  left: 1em;
+}
+
+.reservedRoom {
+  display: none;
+  margin: 3em 20em;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.reservedRoom ul div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 1.5em;
+
+}
+
+.reservedRoom .listHeadings {
+  color: gray;
+}
+
+.reservedRoom .listValues {
+  font-weight: bold;
+}
+
+.reservedRoom img {
+  width: 100%;
+  height: 16em;
+}
+
+.priceAndCancel {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.invalidConfirmationNum {
+  display: none;
+  text-align: center;
+  color: #DA470C;
+}
+li {
+  list-style-type: none;
+}
+
+
+
+
+/*media queries */
+
+@media only screen and (max-width: 1050px){
+  .serviceItems{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  
+  }
+  .serviceItems > div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+
+  .picCardsCotainer{
+    display: flex;
+    width: 100%;
+   
+    margin-top: 100px;
+    
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  
+  
+  .picCardsCotainer > div{
+    width: 90%;
+    background-color: #51555A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left : 0px;
+    margin-bottom: 20px;
+ 
+    text-align: center;
+    color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .roomGridMainCont{
+    width: 100%;
+   
+   
+    display: flex;
+    
+    align-items: center;
+    flex-direction: column;
+
+  }
+  
+  
+  .rooms{
+    width: 60%;
+    
+    background-color:#FFFFFF;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
+  
+  }
+  
+}
+
+
+@media(max-width:1150px) {
+  .reservedRoom {
+    margin: 3em;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .serviceItems{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    
+  
+  }
+  
+  .datePicker{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    align-items: center;
+  }
+  
+  .datePicker > div {
+    width: 60%;
+    margin-left: 20px;
+  }
+  .filter{
+    
+    text-align: center;
+  }
+  .rooms{
+    width: 95%;
+    margin-left: 0;
+    background-color:#FFFFFF;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+  
+  }
+  .roomPrice{
+    display: flex;
+    justify-content: center;
+  }
+  .mainDetails > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .roomDetsPics{
+    display: flex;
+    width: 90%;
+    
+    flex-direction: column;
+    align-content: center;
+    
+  }
+    .roomDetsPics > img{
+      width: 350px;
+      margin-left: 0px;
+    }
+  
+  
 }

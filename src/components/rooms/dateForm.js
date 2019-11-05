@@ -3,6 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DateFnsUtils from "@date-io/date-fns"
+import moment from "moment"
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -24,8 +25,8 @@ export default function MaterialUIPickers(props) {
   const classes = useStyles();
 
   let dates;
-  const [startSelectedDate, setStartSelectedDate] = React.useState(new Date());
-  const [endSelectedDate, setEndSelectedDate] = React.useState (new Date())
+  const [startSelectedDate, setStartSelectedDate] = React.useState(moment());
+  const [endSelectedDate, setEndSelectedDate] = React.useState (moment(moment()).add(1, 'days'))
  
 
   const handleStartDateChange = date => {
@@ -48,7 +49,7 @@ export default function MaterialUIPickers(props) {
                             name = "startDate"
                             margin="normal"
                             id="date-picker-dialog"
-                            label="Check-Out"
+                            label="Check-In"
                             format="MM-dd-yyyy"
                             value={startSelectedDate}
                             onChange={handleStartDateChange}

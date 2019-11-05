@@ -10,21 +10,36 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: "center"
-  },
+    justifyContent: "center",
+    '@media only screen and (max-width: 700px)' : {
+      display: "flex",
+      flexDirection: "column",
+      alignItems : "center"
+    }
+    
+    },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: window.innerWidth * .20,
+    width: "23%",
+    '@media only screen and (max-width: 700px)' : {
+      width: "60%",
+    }
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
   button: {
     margin: theme.spacing(1),
+    
   },
   input: {
     display: 'none',
   },
+  filter: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  }
 }));
 
 export default function SimpleSelect(props) {
@@ -73,7 +88,7 @@ export default function SimpleSelect(props) {
   
 
   return (
-      <div style = {disp}> 
+      <div className = {classes.filter} style = {disp}> 
         <form className={classes.root} autoComplete="off"  >
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="price-simple">Price</InputLabel>
@@ -142,11 +157,11 @@ export default function SimpleSelect(props) {
                 </Select>
             </FormControl>
              
-                
-        </form>
-        <Button color="secondary" className={classes.button} onClick = {handleResetFilters}>
+            <Button color="secondary" className={classes.button} onClick = {handleResetFilters}>
               Reset
           </Button>
+        </form>
+        
 
         
     </div>

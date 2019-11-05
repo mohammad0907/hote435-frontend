@@ -3,7 +3,8 @@ import moment from "moment";
 import '../../../App.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TestImg from "./images/testImage.jpg"
+import TestImg from "./images/testImage.jpg";
+import { NavLink} from "react-router-dom"
 
 
 
@@ -87,7 +88,7 @@ if(props.disp){
                         
                          ){
                             return (
-                            <div key = {items.id} className = "rooms" onClick = {() => {alert(items.id)}}> 
+                            <div key = {items.id} className = "rooms" > 
                                 <div className = "roomInfo">
                                     <div className ={classes.roomImage}>
                                         
@@ -114,10 +115,10 @@ if(props.disp){
 
                                 <div className = "roomPrice">
                                     <div>
-                                        <h2>Price: ${items.price}</h2>
+                                        <h3>Starting Price: ${items.price}</h3>
                                     </div>
-                                    <Button variant="contained" color="primary" size = "medium" className={classes.button}>
-                                        Select
+                                    <Button variant="contained" color="defualt" size = "medium" className={classes.button}>
+                                    <NavLink to = {"/roomdetails/" + (items.id-1)+ "/" + props.startDate + "/" + props.endDate}>Select</NavLink>
                                      </Button>
                                 </div>
                             </div>   

@@ -27,7 +27,7 @@ export default function Intro(){
         <div style = {mainDiv} className= "introMain">
             <div className = "titleContainer">
                 <div>
-                    <h1 style = {{fontSize : "80px"}}>Luxurious Rooms</h1>
+                    <h1 style = {{fontSize : "75px"}}>Luxurious Rooms</h1>
                 </div>
                 <div>
                     <h3>Deluxe Rooms Starting At $300</h3>

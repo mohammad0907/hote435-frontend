@@ -25,6 +25,14 @@ const useStyles = makeStyles(theme => ({
   background :{
       backgroundColor: "whitesmoke",
       
+  },
+  logoImg :{
+    paddingTop : "7px", 
+    position: "relative" , 
+    left: "100px",
+    '@media only screen and (max-width: 600px)' : {
+      left : "0px",
+    }
   }
 }));
 
@@ -37,13 +45,13 @@ export default function ButtonAppBar() {
         <Toolbar>
           
           <Typography variant="h6" className={classes.title}>
-            <img src = {Logo} alt = "logo" width = "180px" height = "60px" style = {{paddingTop : "7px", position: "relative" , left: "100px"}}/>
+            <img src = {Logo} alt = "logo" width = "180px" height = "60px" className = {classes.logoImg} />
           </Typography>
           <div className = "navButtons">
             <Button color="black" ><NavLink to = "/">Home</NavLink></Button>
             <Button color="black"><NavLink to = "/rooms">Rooms</NavLink></Button>
             <Button color="black"><NavLink to = "/reservation">Reservation</NavLink></Button>
-            <Button color="black"><NavLink to = "/checkout">Checkout</NavLink> </Button>
+            
           </div>
         </Toolbar>
       </AppBar>
