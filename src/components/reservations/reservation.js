@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
-import Rooms from '../rooms/rooms.js';
 import RoomImg from './images/room2.jpg';
 
 const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
+    width: "40%",
+    '@media only screen and (max-width: 700px)' : {
+      width: "90%",
+    }
+  },
+  button: {
+    width: '15%'
   }
 }));
 
@@ -169,7 +174,7 @@ function TextFields() {
         </ul>
         <div className="priceAndCancel">
           <h2>Price: $<span id='price'></span></h2>
-          <Button variant="contained" color="primary" size = "medium" className={classes.button} onClick={cancelReservation} >Cancel Reservation
+          <Button variant="contained" color="primary" size = "medium" onClick={cancelReservation} >Cancel Reservation
           </Button>
         </div>
       </div>
