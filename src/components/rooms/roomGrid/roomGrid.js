@@ -118,7 +118,7 @@ if(props.disp){
                                         <h3>Starting Price: ${items.price}</h3>
                                     </div>
                                     <Button variant="contained" color="defualt" size = "medium" className={classes.button}>
-                                    <NavLink to = {"/roomdetails/" + (items.id-1)+ "/" + props.startDate + "/" + props.endDate}>Select</NavLink>
+                                    <NavLink to = {"/roomdetails/" + (idx)+ "/" + props.startDate + "/" + props.endDate}>Select</NavLink>
                                      </Button>
                                 </div>
                             </div>   
