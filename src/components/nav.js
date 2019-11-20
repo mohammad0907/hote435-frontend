@@ -4,12 +4,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import Logo from "./icons/logo.jpg"
 
 import "../App.css"
 import { NavLink} from "react-router-dom"
+import { classes } from 'istanbul-lib-coverage';
 
+let display = false;
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -17,6 +21,28 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(0),
+  },
+  navButtons:{
+      display: 'block',
+      '@media only screen and (max-width: 460px)':{
+        display: 'none',
+    }
+    
+  },
+  hamburgerMenu : {
+    marginRight: theme.spacing(0),
+    display: 'none',
+    '@media only screen and (max-width: 460px)':{
+        display: 'block',
+    }
+  },
+  hamburgerMenuItems :{
+
+    
+    '@media only screen and (min-width: 600px)':{
+      display: 'none',
+  }
+  
   },
   title: {
     flexGrow: 1,
@@ -36,8 +62,35 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+
+
+
+
+
+
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const [styles, setStyles] = React.useState({
+    display : 'none',
+    flexDirection: 'column',
+    '@media only screen and (min-width: 600px)':{
+      display: 'none',
+    }
+  })
+
+  function menuToggle(){
+    display = !display
+    setStyles({
+      display: display ? 'flex' : 'none',
+      flexDirection: 'column',
+      '@media only screen and (min-width: 600px)':{
+        display: 'none',
+     }
+
+    })
+   console.log(styles)
+}
 
   return (
     <div className={classes.root}>
@@ -47,13 +100,29 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             <img src = {Logo} alt = "logo" width = "180px" height = "60px" className = {classes.logoImg} />
           </Typography>
-          <div className = "navButtons">
+          <div className = {classes.navButtons}>
             <Button color="black" ><NavLink to = "/">Home</NavLink></Button>
             <Button color="black"><NavLink to = "/rooms">Rooms</NavLink></Button>
             <Button color="black"><NavLink to = "/reservation">Reservation</NavLink></Button>
             
           </div>
+
+          <IconButton
+            edge="start"
+            className={classes.hamburgerMenu}
+            color="primary"
+            aria-label="open drawer"
+            onClick = {menuToggle}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
+        <div style = {styles} >
+            <Button color="black" ><NavLink to = "/">Home</NavLink></Button>
+            <Button color="black"><NavLink to = "/rooms">Rooms</NavLink></Button>
+            <Button color="black"><NavLink to = "/reservation">Reservation</NavLink></Button>
+            
+          </div>
       </AppBar>
     </div>
   );

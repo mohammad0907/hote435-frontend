@@ -7,6 +7,7 @@ import Checkout from "./components/checkout/checkout.js"
 import {BrowserRouter, Route} from "react-router-dom"
 import RoomDetails from "./components/rooms/roomDetails.js"
 import Confirmation from "./components/confirmation.js"
+import "./index.css"
 
 class App extends Component{
     
@@ -22,7 +23,7 @@ class App extends Component{
   render(){
     return(
       <BrowserRouter>
-        <div>
+        <div className = "content">
           <Nav />
            <Route exact path = "/" component = {HomePage} />
            <Route  path = "/rooms" component = {Rooms} />
