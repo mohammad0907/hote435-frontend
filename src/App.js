@@ -30,8 +30,9 @@ class App extends Component{
            <Route  path = "/reservation" component = {Reservation} />
            <Route  path = "/checkout/:room_id/:start_date/:end_date/:price/:days" component = {Checkout} />
          
-           <Route  path = "/roomdetails/:room_id/:start_date/:end_date" component = {RoomDetails} />
+           <Route  path = "/roomdetails/:items/:start_date/:end_date" component = {RoomDetails} />
            <Route path = "/confirmation/:info" component = {Confirmation} />
+           
            
 
         </div>

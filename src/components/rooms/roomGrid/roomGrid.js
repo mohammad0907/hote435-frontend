@@ -87,6 +87,14 @@ if(props.disp){
                         (items.type === props.filters.type || props.filters.type === "all")
                         
                          ){
+                             let roomInfo = {
+                                 id : items.id,
+                                 price: items.price,
+                                 beds: items.beds,
+                                 guestsAllowed: items.guestsAllowed,
+                                 type : items.type
+                                 
+                             }
                             return (
                             <div key = {items.id} className = "rooms" > 
                                 <div className = "roomInfo">
@@ -118,7 +126,7 @@ if(props.disp){
                                         <h3>Starting Price: ${items.price}</h3>
                                     </div>
                                     <Button variant="contained" color="defualt" size = "medium" className={classes.button}>
-                                    <NavLink to = {"/roomdetails/" + (idx)+ "/" + props.startDate + "/" + props.endDate}>Select</NavLink>
+                                    <NavLink to = {"/roomdetails/" + JSON.stringify(roomInfo) + "/" + props.startDate + "/" + props.endDate}>Select</NavLink>
                                      </Button>
                                 </div>
                             </div>   

@@ -19,7 +19,7 @@ let roomData = JSON.parse(localStorage.getItem("roomStorage"))
 console.log(roomData)
 
 function RoomsDetails (props) {
-        const [roomId, setRoomID] = React.useState(0)
+        const [roomInfo, setRoomInfo] = React.useState({})
         const [startDate, setStartDate] = React.useState("")
         const [endDate, setEndDate] = React.useState("")
       
@@ -31,7 +31,7 @@ function RoomsDetails (props) {
         console.log(end)
         console.log(diff)
         useEffect(() => {
-            setRoomID(props.match.params.room_id)
+            setRoomInfo(JSON.parse(props.match.params.items))
             setStartDate(props.match.params.start_date)
             setEndDate(props.match.params.end_date)
             
@@ -55,21 +55,21 @@ function RoomsDetails (props) {
                 </div>
                 <div className = "mainDetails">
                     <div>
-                        <h3>Beds: {roomData[roomId].beds} </h3>
-                        <h3 style = {{marginLeft : "70px", marginRight: "50px"}}>Max Guests Allowed: {roomData[roomId].guestsAllowed} </h3>
-                        <h3>Room Type: {roomData[roomId].type} </h3>
+                        <h3>Beds: {roomInfo.beds} </h3>
+                        <h3 style = {{marginLeft : "70px", marginRight: "50px"}}>Max Guests Allowed: {roomInfo.guestsAllowed}  </h3>
+                        <h3>Room Type: {roomInfo.type}  </h3>
                         
                     </div>
                     <div>
-                        <h3>Check-In: {startDate}</h3>
-                        <h3 style = {{marginLeft : "50px", marginRight: "50px"}}>Check-Out: {endDate}</h3>
-                        <h3>Price: ${roomData[roomId].price} X {diff} Days = ${roomData[roomId].price * diff} </h3>
+                        <h3>Check-In: {startDate} </h3>
+                        <h3 style = {{marginLeft : "50px", marginRight: "50px"}}>Check-Out: {endDate} </h3>
+                        <h3>Price: ${roomInfo.price} X {diff} Days = ${ roomInfo.price * diff} </h3>
 
                     </div>
                     
                 </div>
                 <Button variant="contained" color="defualt" size = "medium">
-                    <NavLink to = {"/checkout/" + roomId + "/" + startDate + "/" + endDate + "/" + (roomData[roomId].price * diff)+ "/"+ diff}>Book Now</NavLink>
+                    <NavLink to = {"/checkout/" + roomInfo.id + "/" + startDate + "/" + endDate + "/" + (roomInfo.price * diff)+ "/"+ diff}>Book Now</NavLink>
                 </Button>
                 <br></br>
                 <div className= "roomDetsdesc">

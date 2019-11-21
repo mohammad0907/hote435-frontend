@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
   navButtons:{
       display: 'block',
-      '@media only screen and (max-width: 460px)':{
+      '@media only screen and (max-width: 600px)':{
         display: 'none',
     }
     
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   hamburgerMenu : {
     marginRight: theme.spacing(0),
     display: 'none',
-    '@media only screen and (max-width: 460px)':{
+    '@media only screen and (max-width: 600px)':{
         display: 'block',
     }
   },
@@ -71,6 +71,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  let check = true;
+  const [browser, setBrowser] = React.useState(window.innerWidth)
+ // console.log(browser)
   const [styles, setStyles] = React.useState({
     display : 'none',
     flexDirection: 'column',
@@ -91,6 +94,20 @@ export default function ButtonAppBar() {
     })
    console.log(styles)
 }
+
+  window.addEventListener('resize', handleSize)
+  function handleSize() {
+    console.log(window.innerWidth)
+    if(window.innerWidth > 600 && !check){
+       setStyles({
+         display : 'none',
+         flexDirection: 'column',
+       })
+       check = true;
+    }else if(window.innerWidth <= 600){
+      check = false;
+    }
+  }
 
   return (
     <div className={classes.root}>
