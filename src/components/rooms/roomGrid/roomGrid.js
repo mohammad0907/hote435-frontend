@@ -39,7 +39,8 @@ export default function RoomsGrid(props) {
     
     
 let roomsAvail = false
-
+console.log(props.startDate)
+console.log(props.endDate)
 
 if(props.disp){
     disp.display = "flex"
@@ -103,7 +104,7 @@ if(props.disp){
                                     </div>
 
                                     <div className = "roomDesc">
-                                        <h2>Room Title</h2>
+                                        <h2> {items.type} Room </h2>
                                         <div className = "specificDesc">
                                             <div>
                                               <span style = {{fontSize : "12px", color: "gray"}}>Max Guests</span>

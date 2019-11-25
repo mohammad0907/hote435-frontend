@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React from "react"
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { NavLink} from "react-router-dom"
 import moment from "moment";
+import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles(theme => ({
@@ -77,7 +78,7 @@ export default function Checkout(props) {
     checkIn : props.match.params.start_date,
     checkOut: props.match.params.end_date,
     price : props.match.params.price,
-    confirmationNum: Math.floor(Math.random() * (9999999999 - 1000000000)) + 1000000000
+    //confirmationNum: Math.floor(Math.random() * (9999999999 - 1000000000)) + 1000000000
 
    
    
@@ -85,6 +86,11 @@ export default function Checkout(props) {
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
+  };
+  const submit = event => {
+    event.preventDefault();
+    console.log("SUBMIT", event);
+    props.history.push("/confirmation/" + JSON.stringify(values))
   };
 
   console.log(values)
@@ -95,6 +101,10 @@ export default function Checkout(props) {
         return(
             <div className = "checkoutMain">
                 <h1>Check Out</h1>
+                <form
+                onSubmit={submit}
+                style = {{display : 'flex', flexDirection: 'column', alignItems: 'center',}}
+                >
                 <div className = "nameCont">
                     <h2>Name</h2>
                     <div className = "nameForms">
@@ -106,6 +116,7 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.fName}
                         onChange = {handleChange('fName')}
+                        required
                         
                      />
 
@@ -117,6 +128,7 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.lName}
                         onChange = {handleChange('lName')}
+                        required
                     />
                     </div>
                     <div className = "emailForm" style = {{width: "100%"}}>
@@ -132,6 +144,7 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.email}
                         onChange = {handleChange('email')}
+                        required
                         
                      />
                     </div>
@@ -151,6 +164,7 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.address}
                         onChange = {handleChange('address')}
+                        required
                         
                      />
 
@@ -167,67 +181,74 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.city}
                         onChange = {handleChange('city')}
+                        required
                         
                         
                      />
 
-                     <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="age-simple">State</InputLabel>
+                     <FormControl required className={classes.formControl}>
+                            <InputLabel htmlFor="age-native-required">State</InputLabel>
+                            
                             <Select
+                            native
                             value={values.state}
                             onChange={handleChange('state')}
+                            
+                            
                             >
-                           <MenuItem value = {"Alabama"}> Alabama</MenuItem>
-                           <MenuItem value = {"Alaska"}> Alaska</MenuItem>
-                           <MenuItem value = {"Arizona"}> Arizona</MenuItem>
-                           <MenuItem value = {"Arkansas"}> Arkansas</MenuItem>
-                           <MenuItem value = {"Californa"}> California</MenuItem>
-                           <MenuItem value = {"Colorado"}> Colorado</MenuItem>
-                           <MenuItem value = {"Connecticut"}> Connecticut</MenuItem>
-                           <MenuItem value = {"Delaware"}> Delaware</MenuItem>
-                           <MenuItem value = {"Florida"}> Florida</MenuItem>
-                           <MenuItem value = {"Georgia"}> Georgia</MenuItem>
-                           <MenuItem value = {"Hawaii"}> Hawaii</MenuItem>
-                           <MenuItem value = {"Idaho"}> Idaho</MenuItem>
-                           <MenuItem value = {"Illinois"}> Illinois</MenuItem>
-                           <MenuItem value = {"Indiana"}> Indiana</MenuItem>
-                           <MenuItem value = {"Iowa"}> Iowa</MenuItem>
-                           <MenuItem value = {"Kansas"}> Kansas</MenuItem>
-                           <MenuItem value = {"Kentucky"}> Kentucky</MenuItem>
-                           <MenuItem value = {"Louisiana"}> Louisiana</MenuItem>
-                           <MenuItem value = {"Maine"}> Maine</MenuItem>
-                           <MenuItem value = {"Maryland"}> Maryland</MenuItem>
-                           <MenuItem value = {"Massachusetts"}> Massachusetts</MenuItem>
-                           <MenuItem value = {"Michigan"}> Michigan</MenuItem>
-                           <MenuItem value = {"Minnesota"}> Minnesota</MenuItem>
-                           <MenuItem value = {"Mississippi"}> Mississippi</MenuItem>
-                           <MenuItem value = {"Missouri"}> Missouri</MenuItem>
-                           <MenuItem value = {"Montana"}> Montana</MenuItem>
-                           <MenuItem value = {"Nebreska"}> Nebraska</MenuItem>
-                           <MenuItem value = {"Neveda"}> Nevada</MenuItem>
-                           <MenuItem value = {"New Hampshire"}> New Hampshire</MenuItem>
-                           <MenuItem value = {"New Jersey"}> New Jersey</MenuItem>
-                           <MenuItem value = {"New Mexico"}> New Mexico</MenuItem>
-                           <MenuItem value = {"New York"}> New York</MenuItem>
-                           <MenuItem value = {"North Carolina"}> North Carolina</MenuItem>
-                           <MenuItem value = {"North Dakota"}> North Dakota</MenuItem>
-                           <MenuItem value = {"Ohio"}> Ohio</MenuItem>
-                           <MenuItem value = {"Oklahoma"}> Oklahoma</MenuItem>
-                           <MenuItem value = {"Oregon"}> Oregon</MenuItem>
-                           <MenuItem value = {"Pennsylvania"}> Pennsylvania</MenuItem>
-                           <MenuItem value = {"Rhode Island"}> Rhode Island</MenuItem>
-                           <MenuItem value = {"South Carolina"}> South Carolina</MenuItem>
-                           <MenuItem value = {"South Dakota"}> South Dakota</MenuItem>
-                           <MenuItem value = {"Tennessee"}> Tennessee</MenuItem>
-                           <MenuItem value = {"Texas"}> Texas</MenuItem>
-                           <MenuItem value = {"Utah"}>  Utah</MenuItem>
-                           <MenuItem value = {"Vermont"}> Vermont</MenuItem>
-                           <MenuItem value = {"Virginia"}> Virginia</MenuItem>
-                           <MenuItem value = {"Washington"}> Washington</MenuItem>
-                           <MenuItem value = {"West Virginia"}> West Virginia</MenuItem>
-                           <MenuItem value = {"Wisconsin"}> Wisconsin</MenuItem>
-                           <MenuItem value = {"Wyoming"}> Wyoming</MenuItem>
+                           <option value = ""></option> 
+                           <option value = {"Alabama"}> Alabama</option>
+                           <option value = {"Alaska"}> Alaska</option>
+                           <option value = {"Arizona"}> Arizona</option>
+                           <option value = {"Arkansas"}> Arkansas</option>
+                           <option value = {"Californa"}> California</option>
+                           <option value = {"Colorado"}> Colorado</option>
+                           <option value = {"Connecticut"}> Connecticut</option>
+                           <option value = {"Delaware"}> Delaware</option>
+                           <option value = {"Florida"}> Florida</option>
+                           <option value = {"Georgia"}> Georgia</option>
+                           <option value = {"Hawaii"}> Hawaii</option>
+                           <option value = {"Idaho"}> Idaho</option>
+                           <option value = {"Illinois"}> Illinois</option>
+                           <option value = {"Indiana"}> Indiana</option>
+                           <option value = {"Iowa"}> Iowa</option>
+                           <option value = {"Kansas"}> Kansas</option>
+                           <option value = {"Kentucky"}> Kentucky</option>
+                           <option value = {"Louisiana"}> Louisiana</option>
+                           <option value = {"Maine"}> Maine</option>
+                           <option value = {"Maryland"}> Maryland</option>
+                           <option value = {"Massachusetts"}> Massachusetts</option>
+                           <option value = {"Michigan"}> Michigan</option>
+                           <option value = {"Minnesota"}> Minnesota</option>
+                           <option value = {"Mississippi"}> Mississippi</option>
+                           <option value = {"Missouri"}> Missouri</option>
+                           <option value = {"Montana"}> Montana</option>
+                           <option value = {"Nebreska"}> Nebraska</option>
+                           <option value = {"Neveda"}> Nevada</option>
+                           <option value = {"New Hampshire"}> New Hampshire</option>
+                           <option value = {"New Jersey"}> New Jersey</option>
+                           <option value = {"New Mexico"}> New Mexico</option>
+                           <option value = {"New York"}> New York</option>
+                           <option value = {"North Carolina"}> North Carolina</option>
+                           <option value = {"North Dakota"}> North Dakota</option>
+                           <option value = {"Ohio"}> Ohio</option>
+                           <option value = {"Oklahoma"}> Oklahoma</option>
+                           <option value = {"Oregon"}> Oregon</option>
+                           <option value = {"Pennsylvania"}> Pennsylvania</option>
+                           <option value = {"Rhode Island"}> Rhode Island</option>
+                           <option value = {"South Carolina"}> South Carolina</option>
+                           <option value = {"South Dakota"}> South Dakota</option>
+                           <option value = {"Tennessee"}> Tennessee</option>
+                           <option value = {"Texas"}> Texas</option>
+                           <option value = {"Utah"}>  Utah</option>
+                           <option value = {"Vermont"}> Vermont</option>
+                           <option value = {"Virginia"}> Virginia</option>
+                           <option value = {"Washington"}> Washington</option>
+                           <option value = {"West Virginia"}> West Virginia</option>
+                           <option value = {"Wisconsin"}> Wisconsin</option>
+                           <option value = {"Wyoming"}> Wyoming</option>
                             </Select>
+                            
                      </FormControl>
 
                      <TextField
@@ -238,7 +259,7 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.zip}
                         onChange = {handleChange('zip')}
-                        
+                        required
                      />
 
 
@@ -255,45 +276,51 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.creditCardNum}
                         onChange = {handleChange('creditCardNum')}
+                        required
                         
                      />
 
-                     <FormControl className={classes.formControl}>
+                     <FormControl required className={classes.formControl}>
                             <InputLabel htmlFor="age-simple">Expiration Month</InputLabel>
                             <Select
                             value={values.expMonth}
                             onChange={handleChange('expMonth')}
+                            native
                             >
-                           <MenuItem value = {1}>01</MenuItem>
-                           <MenuItem value = {2}>02</MenuItem>
-                           <MenuItem value = {3}>03</MenuItem>
-                           <MenuItem value = {4}>04</MenuItem>
-                           <MenuItem value = {5}>05</MenuItem>
-                           <MenuItem value = {6}>06</MenuItem>
-                           <MenuItem value = {7}>07</MenuItem>
-                           <MenuItem value = {8}>08</MenuItem>
-                           <MenuItem value = {9}>09</MenuItem>
-                           <MenuItem value = {10}>10</MenuItem>
-                           <MenuItem value = {11}>11</MenuItem>
-                           <MenuItem value = {12}>12</MenuItem>
+                          <option value = ""></option>
+                           <option value = {1}>01</option>
+                           <option value = {2}>02</option>
+                           <option value = {3}>03</option>
+                           <option value = {4}>04</option>
+                           <option value = {5}>05</option>
+                           <option value = {6}>06</option>
+                           <option value = {7}>07</option>
+                           <option value = {8}>08</option>
+                           <option value = {9}>09</option>
+                           <option value = {10}>10</option>
+                           <option value = {11}>11</option>
+                           <option value = {12}>12</option>
 
                            
                             </Select>
                      </FormControl>
 
-                     <FormControl className={classes.formControl}>
+                     <FormControl required className={classes.formControl}>
                             <InputLabel htmlFor="age-simple">Expiration Year</InputLabel>
                             <Select
                             value={values.expYear}
                             onChange={handleChange('expYear')}
+                            native
+                            
                             >
-                           <MenuItem value = {2019}>2019</MenuItem>
-                           <MenuItem value = {2020}>2020</MenuItem>
-                           <MenuItem value = {2021}>2021</MenuItem>
-                           <MenuItem value = {2022}>2022</MenuItem>
-                           <MenuItem value = {2023}>2023</MenuItem>
-                           <MenuItem value = {2024}>2024</MenuItem>
-                           <MenuItem value = {2025}>2025</MenuItem>
+                            <option value = ""></option>
+                           <option value = {2019}>2019</option>
+                           <option value = {2020}>2020</option>
+                           <option value = {2021}>2021</option>
+                           <option value = {2022}>2022</option>
+                           <option value = {2023}>2023</option>
+                           <option value = {2024}>2024</option>
+                           <option value = {2025}>2025</option>
                             </Select>
                      </FormControl>
 
@@ -306,6 +333,7 @@ export default function Checkout(props) {
                         margin="normal"
                         value = {values.cvv}
                         onChange = {handleChange('cvv')}
+                        required
                         
                      />
 
@@ -318,11 +346,9 @@ export default function Checkout(props) {
                      </div>
 
                     
-                <NavLink to = {"/confirmation/" + JSON.stringify(values)}><div className = "bookNow">
-                    <h3>Book Now</h3>
-
-                 </div> </NavLink>
+                <Button type = "submit"  className = "bookNow" variant="contained" color="primary"> BOOK NOW </Button>
                 </div>
+                </form>
 
 
 
@@ -333,3 +359,4 @@ export default function Checkout(props) {
 
 
 } //end-class
+

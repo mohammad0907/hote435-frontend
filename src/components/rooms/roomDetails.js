@@ -23,8 +23,8 @@ function RoomsDetails (props) {
         const [startDate, setStartDate] = React.useState("")
         const [endDate, setEndDate] = React.useState("")
       
-        let start = moment(startDate, "MM-DD-YYYY")
-        let end = moment(endDate, "MM-DD-YYYY")
+        let start = moment(startDate)
+        let end = moment(endDate)
         let diff = moment.duration(end.diff(start)).asDays()
 
         console.log(start)
@@ -46,7 +46,7 @@ function RoomsDetails (props) {
         
         return(
             <div className = "roomDetailsMain">
-                <h1>Room Name </h1>
+                <h1> {roomInfo.type} Room </h1>
                 <div className = "roomDetsPics">
                     <img src = {roomPic} alt = "roomPic" width = "450px"  />
                     <img src = {kitchenPic} alt = "Kitchenic" width = "450px"  />
@@ -61,8 +61,8 @@ function RoomsDetails (props) {
                         
                     </div>
                     <div>
-                        <h3>Check-In: {startDate} </h3>
-                        <h3 style = {{marginLeft : "50px", marginRight: "50px"}}>Check-Out: {endDate} </h3>
+                        <h3>Check-In: {moment(startDate).format("MM-DD-YYYY")} </h3>
+                        <h3 style = {{marginLeft : "50px", marginRight: "50px"}}>Check-Out: {moment(endDate).format("MM-DD-YYYY")} </h3>
                         <h3>Price: ${roomInfo.price} X {diff} Days = ${ roomInfo.price * diff} </h3>
 
                     </div>

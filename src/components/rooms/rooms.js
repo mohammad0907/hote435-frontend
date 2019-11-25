@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, {useEffect} from "react"
 import "../../App.css"
 import RoomIntro from "./roomIntro.js"
 import DateForm from "./dateForm.js"
@@ -6,6 +6,7 @@ import Filters from "./filters.js"
 import RoomGrid from "./roomGrid/roomGrid.js"
 import moment from "moment"
 import { loadOptions } from "@babel/core"
+import axios from 'axios'
 
 
 
@@ -109,9 +110,10 @@ function Rooms(){
        const getDate = (e) => {
            
             e.preventDefault()
-           setStartDate(e.target.elements.startDate.value)
-            setEndDate(e.target.elements.endDate.value)
+           setStartDate(moment(e.target.elements.startDate.value).format())
+            setEndDate(moment(e.target.elements.endDate.value).format())
             
+           
         
          }
 
@@ -126,15 +128,18 @@ function Rooms(){
          }
 
         
-
-        
-        
+console.log((moment(startDate).isSame(moment().format(), 'day')))
+    
 
          
          
          //to check when a user inputed dates
          if (startDate !== "" && endDate !== ""){
-                if(moment(endDate, "MM-DD-YYYY").isAfter(startDate, "MM-DD-YYYY")){
+                console.log(startDate)
+             
+                if(moment(startDate).isBefore(moment().format(), 'day') || moment(endDate).isBefore(moment().format(), 'day')){
+                    alert("Invalid Date Range")
+                }else if(moment(endDate).isAfter(startDate)){
                     showItems = true;
                 } else {
                     alert("Invalid Date Range")
@@ -142,12 +147,25 @@ function Rooms(){
          }
 
 
+         const [rooms, setRooms] = React.useState([])
+
+        /* useEffect(() => {
+             axios.get('http://localhost:54957/reservations')
+                .then(res => {
+                    const data = res.data
+                    setRooms(data)
+                    console.log(data)
+                    
+                })
+         }, [])*/
+
+
 
         
          
 
         
-      
+      console.log(rooms)
 
          
        
