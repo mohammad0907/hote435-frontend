@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 export default function RoomsGrid(props) {
     const classes = useStyles();
     let roomData = props.roomData
+    let reservationsData = props.reservationsData
     
     let disp = {
         display : "none"
@@ -59,21 +60,28 @@ if(props.disp){
                 
                 {roomData.map((items, idx) => {
                     // first checks for room availability on the gived data range by the user
-                    for (let i = 0; i < items.reservations.length; i++){
-                        if(
-                        (!moment(props.startDate).isBetween(items.reservations[i].checkIn, items.reservations[i].checkOut)) && 
-                        (!moment(props.endDate).isBetween(items.reservations[i].checkIn, items.reservations[i].checkOut)) && 
-                        (!moment(items.reservations[i].checkIn).isBetween(props.startDate, props.endDate)) && 
-                        (!moment(items.reservations[i].checkOut).isBetween(props.startDate, props.endDate )) && 
-                        (!moment(props.startDate).isSame(items.reservations[i].checkIn)) && 
-                        (!moment(props.endDate).isSame(items.reservations[i].checkOut)) 
+                    for (let i = 0; i < reservationsData.length; i++){
+                        
+                        if(items.id === reservationsData[i].roomId){
                         
                         
-                        ) {
-                            roomsAvail = true;
-                        }else {
-                            roomsAvail = false;
-                            break;
+                            if(
+                            (!moment(props.startDate).isBetween(reservationsData[i].checkIn, reservationsData[i].checkOut)) && 
+                            (!moment(props.endDate).isBetween(reservationsData[i].checkIn, reservationsData[i].checkOut)) && 
+                            (!moment(reservationsData[i].checkIn).isBetween(props.startDate, props.endDate)) && 
+                            (!moment(reservationsData[i].checkOut).isBetween(props.startDate, props.endDate )) && 
+                            (!moment(props.startDate).isSame(reservationsData[i].checkIn)) && 
+                            (!moment(props.endDate).isSame(reservationsData[i].checkOut)) 
+                            
+                            
+                            ) {
+                                roomsAvail = true;
+                            }else {
+                                roomsAvail = false;
+                                break;
+                            }
+                        }else{
+                           roomsAvail = true 
                         }
                     }
 
@@ -105,6 +113,7 @@ if(props.disp){
 
                                     <div className = "roomDesc">
                                         <h2> {items.type} Room </h2>
+                                        
                                         <div className = "specificDesc">
                                             <div>
                                               <span style = {{fontSize : "12px", color: "gray"}}>Max Guests</span>
@@ -137,6 +146,7 @@ if(props.disp){
                         
                         
                     }
+                    return null;
                 })}
             </div>
           

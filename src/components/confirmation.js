@@ -1,7 +1,8 @@
-import React from "react"
+import React, {useEffect} from "react"
 import moment from "moment"
 import Logo from "./icons/logo.jpg"
-
+import axios from 'axios'
+import { isFor } from "@babel/types"
 
 
 
@@ -19,6 +20,32 @@ export default function Confirmation(props){
       
     }
     const[info, setInfo] = React.useState(JSON.parse(props.match.params.info))
+    
+    useEffect(() => {
+        
+        
+        axios.post('http://localhost:54957/reservations' , {
+            
+            address: info.address,
+            checkIn: info.checkIn,
+            checkOut: info.checkOut,
+            city:info.city,
+            creditCardNum: info.creditCardNum,
+            cvv: info.cvv,
+            email: info.email,
+            expMonth: info.expMonth,
+            expYear: info.expYear,
+            firstName: info.fName,
+            lastName: info.lName,
+            price: parseFloat(info.price),
+            roomId:info.roomId,
+            state: info.state,
+            zip: info.zip
+
+
+            
+        })
+    }, [])
     
     console.log(info)
 

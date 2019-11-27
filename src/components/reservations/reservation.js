@@ -102,6 +102,8 @@ function TextFields() {
     value = parseInt(e.target.value);
   }
 
+  
+
   let checkConfirmationNum = () => {
     let valid = false;
     document.querySelector('.invalidConfirmationNum').style.display = 'none';

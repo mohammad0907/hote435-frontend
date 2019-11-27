@@ -78,6 +78,7 @@ export default function Checkout(props) {
     checkIn : props.match.params.start_date,
     checkOut: props.match.params.end_date,
     price : props.match.params.price,
+    roomId: props.match.params.room_id
     //confirmationNum: Math.floor(Math.random() * (9999999999 - 1000000000)) + 1000000000
 
    
