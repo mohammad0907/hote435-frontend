@@ -99,6 +99,7 @@ export default function ButtonAppBar() {
   function handleSize() {
     console.log(window.innerWidth)
     if(window.innerWidth > 600 && !check){
+       display = false
        setStyles({
          display : 'none',
          flexDirection: 'column',
@@ -115,7 +116,7 @@ export default function ButtonAppBar() {
         <Toolbar>
           
           <Typography variant="h6" className={classes.title}>
-            <img src = {Logo} alt = "logo" width = "180px" height = "60px" className = {classes.logoImg} />
+          <NavLink to = "/"> <img src = {Logo} alt = "logo" width = "180px" height = "60px" className = {classes.logoImg} /> </NavLink>
           </Typography>
           <div className = {classes.navButtons}>
             <Button color="black" ><NavLink to = "/">Home</NavLink></Button>

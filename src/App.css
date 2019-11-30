@@ -1,9 +1,15 @@
 
 body{
   background-color: #F4F4F4;
+  
 }
 .navButtons{
   
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 .navButtons > * {
   padding: 10px;
@@ -509,12 +515,50 @@ li {
 }
 
 @media only screen and (max-width: 700px){
+
+  .introMain{
+    background-image: url("./components/homePage/images/homePic.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .roomIntroContainer{
+    width: 100%;
+    height:500px;
+    background-image: url("./components/rooms/images/introPic.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reservationIntro {
+    width: 100%;
+    height: 500px;
+    background-image: url("./components/reservations/images/beds.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .serviceItems{
     display: flex;
     width: 100%;
-    flex-wrap: wrap;
+   
     flex-direction: column;
-    align-content: center;
+    align-items: center;
     
   
   }

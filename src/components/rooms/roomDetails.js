@@ -27,13 +27,11 @@ function RoomsDetails (props) {
         let end = moment(endDate)
         let diff = moment.duration(end.diff(start)).asDays()
 
-        console.log(start)
-        console.log(end)
-        console.log(diff)
         useEffect(() => {
             setRoomInfo(JSON.parse(props.match.params.items))
             setStartDate(props.match.params.start_date)
             setEndDate(props.match.params.end_date)
+            window.scrollTo(0, 0);
             
             
         }, [])

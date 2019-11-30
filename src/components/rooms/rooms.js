@@ -19,92 +19,16 @@ function Rooms() {
     const [startDate, setStartDate] = React.useState("")
     const [endDate, setEndDate] = React.useState("")
     let showItems = false
-    let roomData = [
-        {
-            id: 1,
-            price: 100,
-            beds: 2,
-            guestsAllowed: 3,
-            type: "Regular",
-            reservations: [
-                {
-                    checkIn: "10-08-2019",
-                    checkOut: "10-10-2019",
-                    confirmationNumber: 0,
-                    firstName: "",
-                    lastName: ""
-                },
-                {
-                    checkIn: "10-14-2019",
-                    checkOut: "10-20-2019",
-                    confirmationNumber: 0,
-                    firstName: "",
-                    lastName: ""
-                }
-
-            ]
-        },
-        {
-            id: 2,
-            price: 300,
-            beds: 2,
-            guestsAllowed: 3,
-            type: "Deluxe",
-            reservations: [
-                {
-                    checkIn: "10-09-2019",
-                    checkOut: "10-11-2019",
-                    confirmationNumber: 0,
-                    firstName: "",
-                    lastName: ""
-                },
-                {
-                    checkIn: "10-20-2019",
-                    checkOut: "10-23-2019",
-                    confirmationNumber: 0,
-                    firstName: "",
-                    lastName: ""
-                }
-
-            ]
-        },
-
-        {
-            id: 3,
-            price: 400,
-            beds: 3,
-            guestsAllowed: 6,
-            type: "Family",
-            reservations: [
-                {
-                    checkIn: "10-09-2019",
-                    checkOut: "10-15-2019",
-                    confirmationNumber: 0,
-                    firstName: "",
-                    lastName: ""
-                },
-                {
-                    checkIn: "10-16-2019",
-                    checkOut: "10-20-2019",
-                    confirmationNumber: 0,
-                    firstName: "",
-                    lastName: ""
-                }
-
-            ]
-        }
-    ]
-
-    let localStorage = window.localStorage
-    localStorage.setItem("roomStorage", JSON.stringify(roomData))
-
-
     const [filters, setFilters] = React.useState({
         price: 0,
         guestsAllowed: 0,
         beds: 0,
         type: "all"
     })
+    const [rooms, setRooms] = React.useState([])
+    const [reservations, setReservations] = React.useState([])
+
+
 
     // gets the dates from the date form component
     const getDate = (e) => {
@@ -116,23 +40,11 @@ function Rooms() {
 
 
     }
-
-
-
-
-
     // gets the filters from the filters component 
     const getFilters = (filtersVal) => {
 
         setFilters(filtersVal)
     }
-
-
-    console.log((moment(startDate).isSame(moment().format(), 'day')))
-
-
-
-
     //to check when a user inputed dates
     if (startDate !== "" && endDate !== "") {
         console.log(startDate)
@@ -147,11 +59,10 @@ function Rooms() {
     }
 
 
-    const [rooms, setRooms] = React.useState([])
-    const [reservations, setReservations] = React.useState([])
+    
 
     useEffect(() => {
-        axios.get('http://localhost:54957/rooms')
+        axios.get('https://hotel435.azurewebsites.net/rooms')
             .then(res => {
                 const data = res.data
                 setRooms(data)
@@ -160,12 +71,15 @@ function Rooms() {
             })
 
 
-         axios.get('http://localhost:54957/reservations')
+         axios.get('https://hotel435.azurewebsites.net/reservations')
             .then(res => {
                 const resData = res.data
            setReservations(resData)
 
         })
+
+
+        window.scrollTo(0, 0);
         
     }, [])
 

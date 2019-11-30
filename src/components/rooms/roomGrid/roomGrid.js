@@ -31,17 +31,10 @@ export default function RoomsGrid(props) {
     let disp = {
         display : "none"
      }
-    
-    /*console.log(props.startDate)
-    console.log(props.endDate)
-    console.log(props.filters)*/
-  
- 
-    
+     
     
 let roomsAvail = false
-console.log(props.startDate)
-console.log(props.endDate)
+
 
 if(props.disp){
     disp.display = "flex"
