@@ -31,7 +31,7 @@ class App extends Component{
            <Route  path = "/checkout/:room_id/:start_date/:end_date/:price/:days" component = {Checkout} />
          
            <Route  path = "/roomdetails/:items/:start_date/:end_date" component = {RoomDetails} />
-           <Route path = "/confirmation/:info" component = {Confirmation} />
+           <Route path = "/confirmation/:info/:confirmation" component = {Confirmation} />
            
            
 

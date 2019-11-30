@@ -50,7 +50,7 @@ export default function MaterialUIPickers(props) {
                             margin="normal"
                             id="date-picker-dialog"
                             label="Check-In"
-                            format="MM-dd-yyyy"
+                            format="MM/dd/yyyy"
                             value={startSelectedDate}
                             onChange={handleStartDateChange}
                             KeyboardButtonProps={{
@@ -67,7 +67,7 @@ export default function MaterialUIPickers(props) {
                             margin="normal"
                             id="date-picker-dialog"
                             label="Check-Out"
-                            format="MM-dd-yyyy"
+                            format="MM/dd/yyyy"
                             value={endSelectedDate}
                             onChange={handleEndDateChange}
                             KeyboardButtonProps={{

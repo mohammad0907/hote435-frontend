@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select';
 import { NavLink} from "react-router-dom"
 import moment from "moment";
 import Button from '@material-ui/core/Button';
-
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -61,7 +61,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function Checkout(props) {
     //end-constructor
-
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    },[])
     const classes = useStyles();
   const [values, setValues] = React.useState({
     fName: '',
@@ -77,7 +79,7 @@ export default function Checkout(props) {
     cvv: '',
     checkIn : props.match.params.start_date,
     checkOut: props.match.params.end_date,
-    price : props.match.params.price,
+    price : parseFloat(props.match.params.price),
     roomId: props.match.params.room_id
     //confirmationNum: Math.floor(Math.random() * (9999999999 - 1000000000)) + 1000000000
 
@@ -91,7 +93,33 @@ export default function Checkout(props) {
   const submit = event => {
     event.preventDefault();
     console.log("SUBMIT", event);
-    props.history.push("/confirmation/" + JSON.stringify(values))
+   
+    axios.post('https://hotel435.azurewebsites.net/reservations' , {
+            
+            address: values.address,
+            checkIn: values.checkIn,
+            checkOut: values.checkOut,
+            city:values.city,
+            creditCardNum: values.creditCardNum,
+            cvv: values.cvv,
+            email: values.email,
+            expMonth: values.expMonth,
+            expYear: values.expYear,
+            firstName: values.fName,
+            lastName: values.lName,
+            price: values.price,
+            roomId:values.roomId,
+            state: values.state,
+            zip: values.zip
+
+
+            
+        }).then(res => {
+            
+            props.history.push("/confirmation/" + JSON.stringify(values) + "/" + res.data.confirmationNumber)
+        })
+        
+    
   };
 
   console.log(values)

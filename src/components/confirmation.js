@@ -21,46 +21,34 @@ export default function Confirmation(props){
     }
     const[info, setInfo] = React.useState(JSON.parse(props.match.params.info))
     
+    
     useEffect(() => {
         
         
-        axios.post('http://localhost:54957/reservations' , {
-            
-            address: info.address,
-            checkIn: info.checkIn,
-            checkOut: info.checkOut,
-            city:info.city,
-            creditCardNum: info.creditCardNum,
-            cvv: info.cvv,
-            email: info.email,
-            expMonth: info.expMonth,
-            expYear: info.expYear,
-            firstName: info.fName,
-            lastName: info.lName,
-            price: parseFloat(info.price),
-            roomId:info.roomId,
-            state: info.state,
-            zip: info.zip
-
-
-            
-        })
+        window.scrollTo(0,0)
+        setTimeout(() => {
+           
+            props.history.push("/")
+        }, 60000 )
     }, [])
     
-    console.log(info)
+
 
     return(
         <div className= "confirmationCont" style = {getFullScreen}>
                 <img src = {Logo} alt = "logo" width = "360px" /> 
                 <div className = "confirmBox" style = {{marginTop : "30px"}}>
                     <h2>{info.fName}, Here is your Confirmation</h2>
+                    <h4>Confirmation Number: {props.match.params.confirmation}</h4>
                     <h4>Email: {info.email}</h4>
                     <h4>Check-In: {moment(info.checkIn).format("dddd, MMMM, Do, YYYY")}</h4>
                     <h4>Check-Out: {moment(info.checkOut).format("dddd, MMMM, Do, YYYY")}</h4>
                    
                 </div>
-                <div className = "confirmPrice">
+                <div className = "confirmPrice" style = {{textAlign: 'center'}}>
                     <h2>Total Price: ${info.price}</h2>
+                    <h5>Note: Please save this information for your record. You will be sent a confirmation email regarding your reservation. You will be automatically directed to the homepage after 1 minute. Thank You.</h5>
+
                 </div>
 
         </div>
