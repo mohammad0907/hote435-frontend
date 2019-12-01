@@ -1,4 +1,4 @@
-import React, {Component,useEffect} from "react"
+import React, {useEffect} from "react"
 import roomPic from "./images/deluxe/roomImgOne.jpg"
 import kitchenPic from "./images/deluxe/roomImgTwo.jpg"
 import bathroomPic from "./images/deluxe/roomImageThree.jpg"

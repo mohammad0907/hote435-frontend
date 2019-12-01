@@ -5,7 +5,6 @@ import DateForm from "./dateForm.js"
 import Filters from "./filters.js"
 import RoomGrid from "./roomGrid/roomGrid.js"
 import moment from "moment"
-import { loadOptions } from "@babel/core"
 import axios from 'axios'
 
 

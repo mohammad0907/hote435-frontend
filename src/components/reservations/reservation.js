@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import RoomImg from './images/room2.jpg';
 import axios from 'axios'
+import loading from './images/Rolling-1s-200px.gif'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -24,16 +25,24 @@ function TextFields() {
   let value = 0;
   let priceMult;
   let priceMult2;
-
+  const [loadStyles, setLoadStyes] = React.useState({
+    display: 'none'
+  })
   let getConfirmationNum = (e) => {
     value = e.target.value;
   }
 
   let  submitted = () => {
+    setLoadStyes({
+      display : "block"
+    })
     axios.get('https://hotel435.azurewebsites.net/reservations')
       .then(res => {
         const resData = res.data
         checkConfirmationNum(resData);
+        setLoadStyes({
+          display : "none"
+        })
     })
   }
 
@@ -175,6 +184,10 @@ function TextFields() {
 
       <div className="invalidConfirmationNum">
         <h2>Invalid Confimation Number</h2>
+      </div>
+
+      <div style = {{width: "100%", display :'flex', justifyContent: "center", marginTop: "40px" }}>
+        <img src = {loading} style = {loadStyles} height = "40px" alt = "loader" />
       </div>
 
       <div className="reservedRoom">
