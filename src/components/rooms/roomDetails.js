@@ -71,7 +71,7 @@ function RoomsDetails (props) {
                 </Button>
                 <br></br>
                 <div className= "roomDetsdesc">
-                    <p>With state of the art bedrooms, an amazing pool, a blissful spa, a five star resturant, and numerous awesome amenities, our hotel will give you an experience to remember. Are you ready to relax? Select book now to create your reservation. </p>
+                    <p>Enjoy a wonderful stay at one of luxurious rooms. We strive to make each room filled as comfortable as possible. Meeting our customers every meed in order to help them relax is our top priority. Each comes with a luxurious bed(s), a full bathroom, and even a kitchen to store things or enjoy one of our many delicacies and extravagant meals in.We do hope you decide to stay at one of our excellent rooms </p>
                 </div>
 
                 <div className = "serviceContainer">

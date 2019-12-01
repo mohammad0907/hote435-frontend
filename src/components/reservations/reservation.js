@@ -28,7 +28,7 @@ function TextFields() {
   }
 
   let  submitted = () => {
-    axios.get('http://localhost:54957/reservations')
+    axios.get('https://hotel435.azurewebsites.net/reservations')
       .then(res => {
         const resData = res.data
         checkConfirmationNum(resData);
@@ -79,7 +79,7 @@ function TextFields() {
         document.getElementById('checkedIn').innerText = checkedIn;
         document.getElementById('checkedOut').innerText = checkedOut;
 
-        axios.get('http://localhost:54957/rooms')
+        axios.get('https://hotel435.azurewebsites.net/rooms')
           .then(res => {
             const roomData = res.data
             getRoomData(roomData, roomId)
@@ -116,7 +116,7 @@ function TextFields() {
 
   let cancelReservation = () => {
     console.log(value);
-    axios.delete(`http://localhost:54957/reservations/${value}`)
+    axios.delete(`https://hotel435.azurewebsites.net/reservations/${value}`)
       .then(res => {
         console.log(res.data)
     });
@@ -209,7 +209,7 @@ function TextFields() {
 
         <div className="priceAndCancel">
           <h2>Price: $<span id='price'></span></h2>
-          <Button variant="contained" color="primary" size = "medium" onClick={openModal} >Cancel Reservation
+          <Button variant="contained" color="secondary" size = "medium" onClick={openModal} >Cancel Reservation
           </Button>
         </div>
 
