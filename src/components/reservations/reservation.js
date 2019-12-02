@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
@@ -25,121 +25,111 @@ function TextFields() {
   let value = 0;
   let priceMult;
   let priceMult2;
+  let textInput = useRef(null);
+
   const [loadStyles, setLoadStyes] = React.useState({
     display: 'none'
   })
-  let getConfirmationNum = (e) => {
-    value = e.target.value;
-  }
 
-  let  submitted = () => {
+  let submitted = () => {
+    value = textInput.current.value;
+
     setLoadStyes({
       display : "block"
     })
-    axios.get('https://hotel435.azurewebsites.net/reservations')
+    
+    axios.get(`https://hotel435.azurewebsites.net/reservations/${value}`)
       .then(res => {
-        const resData = res.data
+        document.querySelector('.invalidConfirmationNum').style.display = 'none';
+        const resData = res.data;
         checkConfirmationNum(resData);
         setLoadStyes({
           display : "none"
         })
-    })
+      })
+      .catch(() => {
+        document.querySelector('.invalidConfirmationNum').style.display = 'block';
+        document.querySelector('.reservedRoom').style.display = "none";
+        setLoadStyes({
+          display : "none"
+        })
+      })
   }
 
   let checkConfirmationNum = (resData) => {
-    let valid = false;
-    document.querySelector('.invalidConfirmationNum').style.display = 'none';
-    document.querySelector('.reservedRoom').style.display = "none";
-
-    for (let i = 0, j = resData.length; i < j; i++) {
-      if (resData[i].confirmationNumber === value) {
-        const roomId = resData[i].roomId;
-        let checkInDate = resData[i].checkIn;
-        let checkOutDate = resData[i].checkOut;
-        let checkedIn;
-        let checkedOut;
-        
-        if (resData[i].isCheckedIn) {
-          checkedIn = 'Yes';
-        }
-        else {
-          checkedIn = "No";
-        }
-
-        if (resData[i].isCheckedOut) {
-          checkedOut = 'Yes';
-        }
-        else {
-          checkedOut = "No";
-        }
-
-        checkInDate = `${checkInDate.substring(5, 10)}-${checkInDate.substring(0, 4)}`;
-        checkOutDate = `${checkOutDate.substring(5, 10)}-${checkOutDate.substring(0, 4)}`;
-        priceMult2 = parseInt(checkOutDate.substring(3,5));
-
-        if (checkInDate.substring(0, 2) === checkOutDate.substring(0, 2)) {
-          priceMult = parseInt(checkInDate.substring(3,5));
-          priceMult = priceMult2 - priceMult;
-        }
-        else {
-          switch(checkInDate.substring(0,2)) {
-            case "01":
-            case "03":
-            case "05":
-            case "07":
-            case "08":
-            case "10":
-            case "12":
-                priceMult = 31 - parseInt(checkInDate.substring(3,5));
-                break;                 
-            case "02":
-                priceMult = 28 - parseInt(checkInDate.substring(3,5));
-                break; 
-            case "04":
-            case "06":
-            case "09":
-            case "11":
-                priceMult = 30 - parseInt(checkInDate.substring(3,5));
-                break;   
-          }
-          priceMult = priceMult2 + priceMult;
-        }
-
-        document.querySelector('.reservedRoom').style.display = "block";
-        document.getElementById('checkIn').innerText = checkInDate;
-        document.getElementById('checkOut').innerText = checkOutDate;
-        document.getElementById('guestName').innerText = resData[i].firstName;
-        document.getElementById('guestName').innerText += ` ${resData[i].lastName}`;
-        document.getElementById('guestEmail').innerText = resData[i].email;
-        document.getElementById('zip').innerText = resData[i].zip;
-        document.getElementById('checkedIn').innerText = checkedIn;
-        document.getElementById('checkedOut').innerText = checkedOut;
-
-        axios.get('https://hotel435.azurewebsites.net/rooms')
-          .then(res => {
-            const roomData = res.data
-            getRoomData(roomData, roomId)
-        })
-
-        valid = true;
-        break;
-      }
-    }
+    let checkInDate = resData.checkIn;
+    let checkOutDate = resData.checkOut;
+    let checkedIn;
+    let checkedOut;
     
-    if (!valid) {
-      document.querySelector('.invalidConfirmationNum').style.display = 'block';
+    if (resData.isCheckedIn) {
+      checkedIn = 'Yes';
     }
+    else {
+      checkedIn = "No";
+    }
+
+    if (resData.isCheckedOut) {
+      checkedOut = 'Yes';
+    }
+    else {
+      checkedOut = "No";
+    }
+
+    checkInDate = `${checkInDate.substring(5, 10)}-${checkInDate.substring(0, 4)}`;
+    checkOutDate = `${checkOutDate.substring(5, 10)}-${checkOutDate.substring(0, 4)}`;
+    priceMult2 = parseInt(checkOutDate.substring(3,5));
+
+    if (checkInDate.substring(0, 2) === checkOutDate.substring(0, 2)) {
+      priceMult = parseInt(checkInDate.substring(3,5));
+      priceMult = priceMult2 - priceMult;
+    }
+    else {
+      switch(checkInDate.substring(0,2)) {
+        case "01":
+        case "03":
+        case "05":
+        case "07":
+        case "08":
+        case "10":
+        case "12":
+            priceMult = 31 - parseInt(checkInDate.substring(3,5));
+            break;                 
+        case "02":
+            priceMult = 28 - parseInt(checkInDate.substring(3,5));
+            break; 
+        case "04":
+        case "06":
+        case "09":
+        case "11":
+            priceMult = 30 - parseInt(checkInDate.substring(3,5));
+            break;   
+      }
+      priceMult = priceMult2 + priceMult;
+    }
+
+    document.querySelector('.reservedRoom').style.display = "block";
+    document.getElementById('checkIn').innerText = checkInDate;
+    document.getElementById('checkOut').innerText = checkOutDate;
+    document.getElementById('guestName').innerText = resData.firstName;
+    document.getElementById('guestName').innerText += ` ${resData.lastName}`;
+    document.getElementById('guestEmail').innerText = resData.email;
+    document.getElementById('zip').innerText = resData.zip;
+    document.getElementById('checkedIn').innerText = checkedIn;
+    document.getElementById('checkedOut').innerText = checkedOut;
+
+    axios.get(`https://hotel435.azurewebsites.net/rooms/${resData.roomId}`)
+      .then(res => {
+        const roomData = res.data
+        getRoomData(roomData)
+    })    
   }
 
-  function getRoomData(roomData, roomId) {
-    for (let i = 0, j = roomData.length; i < j; i++) {
-      if (roomData[i].id === roomId) {
-        document.getElementById('guests').innerText = roomData[i].guestsAllowed;
-        document.getElementById('beds').innerText = roomData[i].beds;
-        document.getElementById('type').innerText = roomData[i].type;
-        document.getElementById('price').innerText = roomData[i].price * priceMult;
-      }
-    }
+  function getRoomData(roomData) {
+    document.getElementById('guests').innerText = roomData.guestsAllowed;
+    document.getElementById('beds').innerText = roomData.beds;
+    document.getElementById('type').innerText = roomData.type;
+    document.getElementById('price').innerText = roomData.price * priceMult;
   }
 
   let openModal = () => {
@@ -173,7 +163,7 @@ function TextFields() {
             label="Enter Confirmation Number"
             className={classes.textField}
             margin="normal"
-            onChange={getConfirmationNum}
+            inputRef={textInput}
           />
 
           <Button variant="contained" className={classes.button} onClick={submitted} >
