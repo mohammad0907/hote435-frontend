@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import RoomImg from './images/room2.jpg';
 import axios from 'axios'
 import loading from './images/Rolling-1s-200px.gif'
+import moment from  "moment"
+
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -61,14 +63,16 @@ function TextFields() {
     let checkedOut;
     
     if (resData.actualCheckIn != null) {
-      checkedIn = 'Yes';
+      // checkedIn = `${resData.actualCheckIn.substring(5, 10)}-${resData.actualCheckIn.substring(0, 4)}`;
+      checkedIn = moment(resData.actualCheckIn).format("MM-DD-YYYY");
+      document.getElementById('cancelBtnDisplay').style.display = "none";
     }
     else {
       checkedIn = "No";
     }
 
     if (resData.actualCheckOut != null) {
-      checkedOut = 'Yes';
+      checkedOut = moment(resData.actualCheckOut).format("MM-DD-YYYY");
     }
     else {
       checkedOut = "No";
@@ -209,8 +213,10 @@ function TextFields() {
 
         <div className="priceAndCancel">
           <h2>Price: $<span id='price'></span></h2>
-          <Button variant="contained" color="secondary" size = "medium" onClick={openModal} >Cancel Reservation
-          </Button>
+          <div id="cancelBtnDisplay">
+            <Button variant="contained" color="secondary" size = "medium" onClick={openModal} >Cancel Reservation
+            </Button>
+          </div>
         </div>
 
         <div id="modal">
