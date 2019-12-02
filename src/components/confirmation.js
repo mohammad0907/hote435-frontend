@@ -25,10 +25,14 @@ export default function Confirmation(props){
         
         
         window.scrollTo(0,0)
-        setTimeout(() => {
+      let timeout = setTimeout(() => {
            
             props.history.push("/")
-        }, 60000 )
+        }, 10000 )
+
+        return () => {
+            clearTimeout(timeout)
+        }
     }, [])
     
 

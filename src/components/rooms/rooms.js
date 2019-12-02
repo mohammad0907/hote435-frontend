@@ -46,7 +46,7 @@ function Rooms() {
     }
     //to check when a user inputed dates
     if (startDate !== "" && endDate !== "") {
-        console.log(startDate)
+        
 
         if (moment(startDate).isBefore(moment().format(), 'day') || moment(endDate).isBefore(moment().format(), 'day')) {
             alert("Invalid Date Range")
@@ -87,9 +87,6 @@ function Rooms() {
 
 
 
-
-    console.log(rooms)
-    console.log(reservations)
 
 
 
