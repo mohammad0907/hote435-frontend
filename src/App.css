@@ -463,11 +463,12 @@ form{
 .cancelBtns {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .cancelBtns Button {
   width: 30%;
+  margin: 5px;
 }
 
 li {
