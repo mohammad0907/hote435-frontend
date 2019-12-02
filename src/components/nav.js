@@ -91,12 +91,12 @@ export default function ButtonAppBar() {
      }
 
     })
-   console.log(styles)
+   
 }
 
   window.addEventListener('resize', handleSize)
   function handleSize() {
-    console.log(window.innerWidth)
+
     if(window.innerWidth > 600 && !check){
        display = false
        setStyles({

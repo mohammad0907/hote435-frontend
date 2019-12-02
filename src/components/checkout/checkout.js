@@ -77,19 +77,21 @@ export default function Checkout(props) {
     checkOut: props.match.params.end_date,
     price : parseFloat(props.match.params.price),
     roomId: props.match.params.room_id
-    //confirmationNum: Math.floor(Math.random() * (9999999999 - 1000000000)) + 1000000000
+   
 
    
    
   });
+  const [disableButton, setDisableButton] = React.useState(false)
+  const [message, setMessage] = React.useState([])
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
   const submit = event => {
     event.preventDefault();
-    console.log("SUBMIT", event);
-   
+  
+    setDisableButton(true)
     axios.post('https://hotel435.azurewebsites.net/reservations' , {
             
             address: values.address,
@@ -113,19 +115,40 @@ export default function Checkout(props) {
         }).then(res => {
             
             props.history.push("/confirmation/" + JSON.stringify(values) + "/" + res.data.confirmationNumber)
+        }).catch(err => {
+         
+            if(err.response){
+              setMessage(Object.values(err.response.data.errors))
+              setDisableButton(false)
+            }
         })
         
     
   };
 
-  console.log(values)
+ 
     
-        let room = localStorage.getItem("room")
+      
 
-        console.log(room)
+   
         return(
             <div className = "checkoutMain">
                 <h1>Check Out</h1>
+                <div className = "errorMessage">
+                  <ul>
+                    {message.map(items => {
+                      
+                      return(
+                        
+                          <li style = {{color : "red"}}>{items}</li>
+                        
+                      )
+                      
+                      
+                      })}
+
+                      </ul>
+                </div>
                 <form
                 onSubmit={submit}
                 style = {{display : 'flex', flexDirection: 'column', alignItems: 'center',}}
@@ -371,7 +394,7 @@ export default function Checkout(props) {
                      </div>
 
                     
-                <Button type = "submit"  className = "bookNow" variant="contained" color="primary"> BOOK NOW </Button>
+                <Button type = "submit" disabled = {disableButton} className = "bookNow" variant="contained" color="primary"> BOOK NOW </Button>
                 </div>
                 </form>
 

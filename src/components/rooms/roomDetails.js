@@ -11,12 +11,10 @@ import phone from "./images/icons/phone.png"
 import hairDrier from "./images/icons/hair-dryer.png"
 import moment from  "moment"
 
-let roomData = JSON.parse(localStorage.getItem("roomStorage"))
 
 
 
 
-console.log(roomData)
 
 function RoomsDetails (props) {
         const [roomInfo, setRoomInfo] = React.useState({})

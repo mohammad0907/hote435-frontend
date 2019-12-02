@@ -28,7 +28,7 @@ export default function Confirmation(props){
       let timeout = setTimeout(() => {
            
             props.history.push("/")
-        }, 10000 )
+        }, 60000 )
 
         return () => {
             clearTimeout(timeout)

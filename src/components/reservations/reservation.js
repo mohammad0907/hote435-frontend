@@ -141,10 +141,10 @@ function TextFields() {
   }
 
   let cancelReservation = () => {
-    console.log(value);
+   
     axios.delete(`https://hotel435.azurewebsites.net/reservations/${value}`)
       .then(res => {
-        console.log(res.data)
+        
     });
     window.location.reload();
   }
