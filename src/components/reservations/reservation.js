@@ -63,8 +63,7 @@ function TextFields() {
     let checkedOut;
     
     if (resData.actualCheckIn != null) {
-      // checkedIn = `${resData.actualCheckIn.substring(5, 10)}-${resData.actualCheckIn.substring(0, 4)}`;
-      checkedIn = moment(resData.actualCheckIn).format("MM-DD-YYYY");
+      checkedIn = moment.utc(resData.actualCheckIn).local().format('MM-DD-YYYY hh:mm:ss a');
       document.getElementById('cancelBtnDisplay').style.display = "none";
     }
     else {
@@ -72,7 +71,7 @@ function TextFields() {
     }
 
     if (resData.actualCheckOut != null) {
-      checkedOut = moment(resData.actualCheckOut).format("MM-DD-YYYY");
+      checkedOut = moment.utc(resData.actualCheckOut).local().format('MM-DD-YYYY hh:mm:ss a');
     }
     else {
       checkedOut = "No";
