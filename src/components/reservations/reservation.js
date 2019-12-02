@@ -23,8 +23,6 @@ const useStyles = makeStyles(theme => ({
 function TextFields() {
   const classes = useStyles();
   let value = 0;
-  let priceMult;
-  let priceMult2;
   let textInput = useRef(null);
 
   const [loadStyles, setLoadStyes] = React.useState({
@@ -78,35 +76,6 @@ function TextFields() {
 
     checkInDate = `${checkInDate.substring(5, 10)}-${checkInDate.substring(0, 4)}`;
     checkOutDate = `${checkOutDate.substring(5, 10)}-${checkOutDate.substring(0, 4)}`;
-    priceMult2 = parseInt(checkOutDate.substring(3,5));
-
-    if (checkInDate.substring(0, 2) === checkOutDate.substring(0, 2)) {
-      priceMult = parseInt(checkInDate.substring(3,5));
-      priceMult = priceMult2 - priceMult;
-    }
-    else {
-      switch(checkInDate.substring(0,2)) {
-        case "01":
-        case "03":
-        case "05":
-        case "07":
-        case "08":
-        case "10":
-        case "12":
-            priceMult = 31 - parseInt(checkInDate.substring(3,5));
-            break;                 
-        case "02":
-            priceMult = 28 - parseInt(checkInDate.substring(3,5));
-            break; 
-        case "04":
-        case "06":
-        case "09":
-        case "11":
-            priceMult = 30 - parseInt(checkInDate.substring(3,5));
-            break;   
-      }
-      priceMult = priceMult2 + priceMult;
-    }
 
     document.querySelector('.reservedRoom').style.display = "block";
     document.getElementById('checkIn').innerText = checkInDate;
@@ -117,6 +86,7 @@ function TextFields() {
     document.getElementById('zip').innerText = resData.zip;
     document.getElementById('checkedIn').innerText = checkedIn;
     document.getElementById('checkedOut').innerText = checkedOut;
+    document.getElementById('price').innerText = resData.price;
 
     axios.get(`https://hotel435.azurewebsites.net/rooms/${resData.roomId}`)
       .then(res => {
@@ -129,7 +99,6 @@ function TextFields() {
     document.getElementById('guests').innerText = roomData.guestsAllowed;
     document.getElementById('beds').innerText = roomData.beds;
     document.getElementById('type').innerText = roomData.type;
-    document.getElementById('price').innerText = roomData.price * priceMult;
   }
 
   let openModal = () => {
@@ -141,12 +110,13 @@ function TextFields() {
   }
 
   let cancelReservation = () => {
-    console.log(value);
+    value = textInput.current.value;
     axios.delete(`https://hotel435.azurewebsites.net/reservations/${value}`)
       .then(res => {
         console.log(res.data)
     });
-    window.location.reload();
+    document.getElementById('modal').style.display = "none";
+    document.querySelector('.reservedRoom').style.display = "none";
   }
 
   return (
