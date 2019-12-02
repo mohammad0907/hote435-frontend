@@ -110,7 +110,7 @@ function TextFields() {
   }
 
   let cancelReservation = () => {
-   
+    value = textInput.current.value;
     axios.delete(`https://hotel435.azurewebsites.net/reservations/${value}`)
       .then(res => {
         
