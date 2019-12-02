@@ -60,14 +60,14 @@ function TextFields() {
     let checkedIn;
     let checkedOut;
     
-    if (resData.isCheckedIn != null) {
+    if (resData.actualCheckIn != null) {
       checkedIn = 'Yes';
     }
     else {
       checkedIn = "No";
     }
 
-    if (resData.isCheckedOut != null) {
+    if (resData.actualCheckOut != null) {
       checkedOut = 'Yes';
     }
     else {
